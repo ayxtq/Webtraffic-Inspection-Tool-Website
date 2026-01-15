@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team — Webtraffic Inspection Tool</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="team.css">
+
+  <link rel="icon" href="assets/img/project-logo.jpeg">
+</head>
+<body class="is-enter">
+
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="transition-overlay" aria-hidden="true">
+    <div class="loader">
+      <div class="spinner"></div>
+      <span>Loading…</span>
+    </div>
+  </div>
+
+
+  <div class="nav-wrap">
+    <div class="container nav">
+      <div class="uob-brand">
+        <img 
+          src="assets/img/uob-logo.png" 
+          alt="University of Bahrain Logo" 
+          class="uob-logo"
+          width="54" 
+          loading="lazy"
+        >
+        <div class="uob-text-stack">
+          <div class="uob-main">University of Bahrain</div>
+          <div class="uob-sub">
+            College of Information Technology<br>
+            Department of Information System
+          </div>
+        </div>
+      </div>
+
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="demo.html">Project</a>
+        <a href="team.html" class="active">Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container page-wrap">
+
+  
+      <section class="hero-shell reveal">
+        <div class="hero-inner">
+          <h1 style="margin-bottom: 8px;">Team</h1>
+          <p class="sub">
+            This project was developed as a Final Year Senior Project during Semester 1 of the 
+            Academic Year 2025/2026 at the College of Information Technology, 
+            University of Bahrain.
+          </p>
+        </div>
+      </section>
+
+  
+      <section class="section">
+      
+        <div class="block reveal">
+          <header>
+            <h2>Students</h2>
+          </header>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Major</th>
+                    <th>Email</th>
+                    <th>Links</th>
+                  </tr>
+                </thead>
+                <tbody>
+             
+                  <tr>
+                    <td data-label="Name"><strong>Fatima Suleman Masood</strong></td>
+                    <td data-label="Major">Cybersecurity</td>
+                    <td data-label="Email">fatimasmasood@gmail.com</td>
+                    <td data-label="Links">
+                      <div class="pills">
+                        <a class="pillbtn" 
+                           href="https://www.linkedin.com/in/fatima-suleman-740514264" 
+                           target="_blank" rel="noopener">
+                          LinkedIn
+                        </a>
+                        <a class="pillbtn" 
+                           href="https://github.com/FatimaSKhan" 
+                           target="_blank" rel="noopener">
+                          GitHub
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+              
+                  <tr>
+                    <td data-label="Name"><strong>Aaya Tariq Alsakhi</strong></td>
+                    <td data-label="Major">Cybersecurity</td>
+                    <td data-label="Email">Aayaalsakhi@gmail.com</td>
+                    <td data-label="Links">
+                      <div class="pills">
+                        <a class="pillbtn" 
+                           href="https://www.linkedin.com/in/aaya-al-sakhi/" 
+                           target="_blank" rel="noopener">
+                          LinkedIn
+                        </a>
+                        <a class="pillbtn" 
+                           href="https://github.com/ayxtq" 
+                           target="_blank" rel="noopener">
+                          GitHub
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+
+                 
+                  <tr>
+                    <td data-label="Name"><strong>Sara Hamad Alshaiji</strong></td>
+                    <td data-label="Major">Cybersecurity</td>
+                    <td data-label="Email">Sara.alshaiji188@gmail.com</td>
+                    <td data-label="Links">
+                      <div class="pills">
+                        <a class="pillbtn" 
+                           href="https://www.linkedin.com/in/sara-alshaiji-3b2940265" 
+                           target="_blank" rel="noopener">
+                          LinkedIn
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+     
+        <div class="block reveal" style="margin-top: 48px;">
+          <header>
+            <h2>Supervisors</h2>
+          </header>
+
+          <div class="table-wrap">
+            <div class="table-scroll">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td data-label="Name"><strong>Mrs. Batool Fadhul</strong></td>
+                    <td data-label="Email">bssaeed@uob.edu.bh</td>
+                  </tr>
+                  <tr>
+                    <td data-label="Name"><strong>Dr. Abdulla K. Aldoseri</strong></td>
+                    <td data-label="Email">akaldoseri@uob.edu.bh</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <script>
+  (function(){
+    const DURATION = 420;
+
+    
+    document.body.classList.add('is-enter');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(() => {
+        document.body.classList.add('is-ready');
+        document.body.classList.remove('is-enter');
+
+       
+        const currentFile = location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          const href = link.getAttribute('href') || '';
+          link.classList.toggle('active', href.includes(currentFile));
+        });
+
+     
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => observer.observe(el));
+      });
+    });
+
+   
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href$=".html"]:not([target="_blank"])');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (href.startsWith('#') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      e.preventDefault();
+      document.body.classList.add('is-leaving');
+      setTimeout(() => window.location.href = href, DURATION);
+    });
+
+
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) {
+        document.body.classList.remove('is-leaving');
+        document.body.classList.add('is-ready');
+      }
+    });
+  })();
+  </script>
+
+  <script src="assets/js/cursor-glow.js" defer></script>
+
+
+</body>
+</html>

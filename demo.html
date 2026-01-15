@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project — Webtraffic Inspection Tool</title>
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="demo.css">
+
+  <link rel="icon" href="assets/img/project-logo.jpeg">
+</head>
+<body class="is-enter">
+
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+
+  <div class="transition-overlay" aria-hidden="true">
+    <div class="loader">
+      <div class="spinner"></div>
+      <span>Loading…</span>
+    </div>
+  </div>
+
+  <div class="nav-wrap">
+    <div class="container nav">
+   
+      <div class="uob-brand">
+        <img 
+          src="assets/img/uob-logo.png" 
+          alt="University of Bahrain Logo" 
+          class="uob-logo"
+          width="54" 
+          loading="lazy"
+        >
+        <div class="uob-text-stack">
+          <div class="uob-main">University of Bahrain</div>
+          <div class="uob-sub">
+            College of Information Technology<br>
+            Department of Information System
+          </div>
+        </div>
+      </div>
+
+   
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="demo.html" class="active">Project</a>
+        <a href="team.html">Team</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="page">
+    <div class="container page-wrap">
+
+   
+      <section class="hero-shell reveal">
+        <div class="hero-inner">
+          <div class="home-grid">
+            <div>
+              <h1 style="margin-bottom: 8px;">Project Overview</h1>
+              <p class="sub">
+                Comprehensive documentation of the Lightweight Webtraffic Inspection Tool;
+                including abstract, objectives, methodology, technologies used, obtained results, 
+                and planned future enhancements.
+              </p>
+            </div>
+          </div>
+        </div>
+    </section>
+      
+     
+<section class="section project-layout">
+  <div class="content-flow accordion-container">
+
+    <div class="accordion-item reveal" data-id="abstract">
+      <div class="accordion-header">
+        <h2>Abstract</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <p>
+          The HTTPS protocol's widespread use has significantly increased the amount of traffic on the encrypted network, enhancing user privacy while also decreasing visibility for administrators who need to identify security risks within encrypted channels. While advanced TLS inspection appliances are necessary for large enterprises, smaller organizations rarely have access to such solutions due to their financial and technical limitations. Creating a security gap where malware, suspicious domains, and harmful file downloads can slip past traditional monitoring tools without being noticed.
+To close this gap, this project develops a lightweight modular TLS Inspection Proxy that makes it easier and more accessible to selectively and transparently inspect HTTPS flows. The system makes use of the mitmproxy framework, which is improved with custom Python add-ons for metadata extraction, domain and file filtering, and automated file hashing for larger files. It uses the VirusTotal API to analyze suspicious files to detect malicious content in real time. All activity is logged in a structured SQLite database, documenting client–server metadata and inspection results. For effective traffic monitoring, a Flask web dashboard shows system activity. Testing verified efficient TLS traffic interception and filtering without major performance problems, making this solution more affordable, deployable, and transparent than other approaches. It shows how a lightweight inspection mechanism can enhance visibility and support early threat identification in encrypted traffic environments, catering to small networks.
+        </p>
+      </div>
+    </div>
+
+    <div class="accordion-item reveal" data-id="objectives">
+      <div class="accordion-header">
+        <h2>Objectives</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <ul class="list">
+          <li>Building a simplified TLS interception environment</li>
+          <li>Automate File Hashing and Verify Security</li>
+          <li>Real-time Traffic Logging and Monitoring</li>
+          <li>Design an intuitive, user-friendly, dashboard interface</li>
+          <li>The efficiency, accuracy, and security of the entire inspection process</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion-item reveal" data-id="methodology">
+      <div class="accordion-header">
+        <h2>Methodology & System Architecture</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <p style="margin-bottom: 16px;">
+          The system's architecture uses a Middle Agent model, with <code>mitmproxy</code> at its core to transparently intercept and decrypt HTTPS traffic. The data flow starts with a client request being captured and decrypted. A custom Python add-on then inspects the request, checking it against blocklists for domains, URLs, and file extensions. If the request is safe, it is forwarded to the web server. The server's response is then intercepted again and passed to a second add-on that leverages the <code>VirusTotal API</code> to scan for malicious content. Based on the result, the response is either sent back to the client or blocked. For full transparency, all traffic and decisions are logged in a central <code>SQLite</code> database, which powers a <code>Flask</code> web dashboard for real-time monitoring and visualization.
+        </p>
+        <div class="media">
+          <img src="assets/img/arch.png" alt="System Architecture Diagram" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item reveal" data-id="technologies">
+      <div class="accordion-header">
+        <h2>Technologies Used</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <div class="grid" style="margin-top: 8px;">
+          <div class="card">
+            <h3>Core Programming</h3>
+            <ul class="list">
+              <li>Python 3</li>
+              <li>HTML5 / CSS3</li>
+              <li>SQL</li>
+              <li>JavaScript (ES6+)</li>
+              <li>Bash Shell commands</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Key Tools & Frameworks</h3>
+            <ul class="list">
+              <li>mitmproxy (traffic interception & inspection)</li>
+              <li>Python Virtual Environment</li>
+              <li>VirusTotal Public API</li>
+              <li>Flask (web dashboard)</li>
+              <li>SQLite (event logging & storage)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item reveal" data-id="results">
+      <div class="accordion-header">
+        <h2>Results & Implementation</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <ul class="list">
+          <li>Successfully intercepted, decrypted, and inspected HTTPS traffic using a lightweight web traffic proxy setup.</li>
+          <li>Implemented custom add-ons for domain blocking, extension filtering, and automated file hashing.</li>
+          <li>Integrated VirusTotal API to detect and block malicious or suspicious downloaded files in real time.</li>
+          <li>Stored all traffic logs—including URLs, IPs, timestamps, and block actions—securely in an SQLite database.</li>
+          <li>Developed a user-friendly Flask dashboard to visualize traffic, display flow details, and track blocked threats.</li>
+          <li>Demonstrated a simplified configuration process that makes TLS inspection accessible to non-expert users.</li>
+        </ul>
+        <div class="grid" style="margin-top: 8px;">
+          <div class="media">
+            <img src="assets/img/results1.png" alt="Dashboard - Traffic Overview" loading="lazy">
+          </div>
+          <div class="media">
+            <img src="assets/img/results2.png" alt="Policy Enforcement Example" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item reveal" data-id="future">
+      <div class="accordion-header">
+        <h2>Conclusion & Future Work</h2>
+        <span class="accordion-icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+      </div>
+      <div class="accordion-content">
+        <p>
+          The developed solution achieves its core objectives of providing accessible TLS traffic inspection and policy enforcement. Planned future work includes:
+        </p>
+        <ul class="list">
+          <li>Implement advanced hashing methods (e.g., deep hashing) to improve detection of modified or partially similar malicious files.</li>
+          <li>Integrate real-time threat intelligence feeds to instantly detect malicious domains, IPs, and URLs.</li>
+          <li>Implement real-time alerts for suspicious activity via email, SMS, or dashboard notifications.</li>
+          <li>Add user authentication to secure access to the dashboard.</li>
+          <li>Integrate machine learning models to automatically detect anomalous patterns and identify malicious HTTPS flows.</li>
+          <li>Enable traffic inspection from remote devices and cloud deployments for centralized monitoring.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  const DURATION = 420;
+
+
+  document.body.classList.add('is-enter');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    requestAnimationFrame(() => {
+      document.body.classList.add('is-ready');
+      document.body.classList.remove('is-enter');
+
+  
+      const currentFile = location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        const href = link.getAttribute('href') || '';
+        link.classList.toggle('active', href.includes(currentFile));
+      });
+
+   
+      const revealEls = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      revealEls.forEach(el => observer.observe(el));
+
+     
+      const items = document.querySelectorAll('.accordion-item');
+      
+      items.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        const content = item.querySelector('.accordion-content');
+        const icon = item.querySelector('.accordion-icon');
+
+        header.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+
+        
+          items.forEach(other => {
+            if (other !== item) {
+              other.classList.remove('open');
+            }
+          });
+
+         
+          if (isOpen) {
+            item.classList.remove('open');
+          } else {
+            item.classList.add('open');
+          }
+        });
+      });
+    });
+  });
+
+  
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href$=".html"]:not([target="_blank"])');
+    if (!link) return;
+
+    const href = link.getAttribute('href');
+    if (href.startsWith('#') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    e.preventDefault();
+    document.body.classList.add('is-leaving');
+    setTimeout(() => location.href = href, DURATION);
+  });
+})();
+</script>
+  <script src="assets/js/cursor-glow.js" defer></script>
+
+
+</body>
+</html>

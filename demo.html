@@ -197,6 +197,12 @@ To close this gap, this project develops a lightweight modular TLS Inspection Pr
   </div>
 </section>
 
+  <button id="toTopBtn" class="to-top-btn" title="Go to top" aria-label="Go to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
+
 <script>
 (function(){
   const DURATION = 420;
@@ -270,6 +276,21 @@ To close this gap, this project develops a lightweight modular TLS Inspection Pr
     document.body.classList.add('is-leaving');
     setTimeout(() => location.href = href, DURATION);
   });
+
+  const toTopBtn = document.getElementById('toTopBtn');
+    if (toTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+          toTopBtn.classList.add('show');
+        } else {
+          toTopBtn.classList.remove('show');
+        }
+      });
+
+      toTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
 })();
 </script>
   <script src="assets/js/cursor-glow.js" defer></script>

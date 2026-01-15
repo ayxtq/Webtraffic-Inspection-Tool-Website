@@ -13,7 +13,7 @@
 
   <link rel="icon" href="assets/img/project-logo.jpeg">
 </head>
-<body class="is-enter">
+<body class="">
 
 
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
@@ -59,7 +59,7 @@
     <div class="container page-wrap">
 
    
-      <section class="hero-shell reveal">
+      <section class="hero-shell">
         <div class="hero-inner">
           <div class="home-grid">
             <div>
@@ -78,14 +78,14 @@
 <section class="section project-layout">
   <div class="content-flow">
 
-    <!-- Abstract -->
-    <div class="project-section reveal">
+    
+    <div class="project-section">
       <h2 class="section-title">Abstract</h2>
       <p>The HTTPS protocol's widespread use has significantly increased the amount of traffic on the encrypted network, enhancing user privacy while also decreasing visibility for administrators who need to identify security risks within encrypted channels. While advanced TLS inspection appliances are necessary for large enterprises, smaller organizations rarely have access to such solutions due to their financial and technical limitations. Creating a security gap where malware, suspicious domains, and harmful file downloads can slip past traditional monitoring tools without being noticed. To close this gap, this project develops a lightweight modular TLS Inspection Proxy that makes it easier and more accessible to selectively and transparently inspect HTTPS flows. The system makes use of the mitmproxy framework, which is improved with custom Python add-ons for metadata extraction, domain and file filtering, and automated file hashing for larger files. It uses the VirusTotal API to analyze suspicious files to detect malicious content in real time. All activity is logged in a structured SQLite database, documenting client–server metadata and inspection results. For effective traffic monitoring, a Flask web dashboard shows system activity. Testing verified efficient TLS traffic interception and filtering without major performance problems, making this solution more affordable, deployable, and transparent than other approaches. It shows how a lightweight inspection mechanism can enhance visibility and support early threat identification in encrypted traffic environments, catering to small networks.</p>
     </div>
 
-    <!-- Objectives -->
-    <div class="project-section reveal">
+
+    <div class="project-section">
       <h2 class="section-title">Objectives</h2>
       <div class="objective-grid">
         <div class="objective-card">
@@ -107,8 +107,8 @@
       </div>
     </div>
 
-    <!-- Methodology -->
-    <div class="project-section reveal">
+   
+    <div class="project-section">
       <h2 class="section-title">Methodology & System Architecture</h2>
       <div class="methodology-grid">
         <div class="methodology-text">
@@ -121,8 +121,8 @@
       </div>
     </div>
 
-    <!-- Technologies -->
-    <div class="project-section reveal">
+   
+    <div class="project-section">
       <h2 class="section-title">Technologies Used</h2>
       <div class="grid" style="margin-top: 8px;">
         <div class="card">
@@ -148,8 +148,8 @@
       </div>
     </div>
 
-    <!-- Results -->
-    <div class="project-section reveal">
+   
+    <div class="project-section">
       <h2 class="section-title">Results & Implementation</h2>
       <ul class="list">
         <li>Successfully intercepted, decrypted, and inspected HTTPS traffic using a lightweight web traffic proxy setup.</li>
@@ -169,8 +169,8 @@
       </div>
     </div>
 
-    <!-- Future Work -->
-    <div class="project-section reveal">
+    
+    <div class="project-section">
       <h2 class="section-title">Conclusion & Future Work</h2>
       <p>The developed solution achieves its core objectives of providing accessible TLS traffic inspection and policy enforcement. Planned future work includes:</p>
       <ul class="list">

@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="base.css">
   <link rel="stylesheet" href="team.css">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
   <link rel="icon" href="assets/img/project-logo.jpeg">
 </head>
 <body class="is-enter">
@@ -187,80 +191,177 @@
     </svg>
   </button>
 
+  <div class="demo-modal" id="walkthroughModal" aria-hidden="true" role="dialog" aria-label="Walkthrough video popup">
+    <div class="demo-modal__backdrop" data-close></div>
+
+    <div class="demo-modal__panel">
+      <div class="demo-modal__top">
+        <div class="demo-modal__title">
+          <strong>Demo</strong>
+          <span class="muted">Webtraffic Inspection Tool Demo</span>
+        </div>
+        <button class="demo-modal__close" type="button" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="demo-modal__video-wrapper">
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="demo-modal" id="explanationModal" aria-hidden="true" role="dialog" aria-label="Explanation video popup">
+    <div class="demo-modal__backdrop" data-close></div>
+
+    <div class="demo-modal__panel">
+      <div class="demo-modal__top">
+        <div class="demo-modal__title">
+          <strong>Explanation</strong>
+          <span class="muted">Project Explanation</span>
+        </div>
+        <button class="demo-modal__close" type="button" aria-label="Close" data-close>×</button>
+      </div>
+
+      <div class="demo-modal__video-wrapper">
+        
+      </div>
+    </div>
+  </div>
 
   <script>
   (function(){
     const DURATION = 420;
-
-    
-    document.body.classList.add('is-enter');
 
     window.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => {
         document.body.classList.add('is-ready');
         document.body.classList.remove('is-enter');
 
-       
-        const currentFile = location.pathname.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          const href = link.getAttribute('href') || '';
-          link.classList.toggle('active', href.includes(currentFile));
+        document.querySelectorAll('.fade-up').forEach((el,i)=>{
+          setTimeout(()=>el.classList.add('in'), i*120);
         });
-
-     
-        const revealElements = document.querySelectorAll('.reveal');
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-
-        revealElements.forEach(el => observer.observe(el));
       });
     });
 
-   
     document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[href$=".html"]:not([target="_blank"])');
-      if (!link) return;
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href) return;
 
-      const href = link.getAttribute('href');
-      if (href.startsWith('#') || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const isAnchor = href.startsWith('#');
+      const isExternal = a.host && a.host !== location.host;
+      const newTab = a.target === '_blank';
+      const modified = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+      if (isAnchor || isExternal || newTab || modified) return;
+      if (!href.endsWith('.html')) return;
 
       e.preventDefault();
       document.body.classList.add('is-leaving');
-      setTimeout(() => window.location.href = href, DURATION);
+      setTimeout(() => { window.location.href = href; }, DURATION);
     });
 
 
-    window.addEventListener('pageshow', (e) => {
-      if (e.persisted) {
-        document.body.classList.remove('is-leaving');
-        document.body.classList.add('is-ready');
+
+    const modals = {};
+    const modalControllers = {
+      demo: {
+        id: 'walkthroughModal',
+        ytId: 'VV0zkG7mjMc',
+        title: 'Webtraffic Inspection Tool Walkthrough'
+      },
+      explanation: {
+        id: 'explanationModal',
+        ytId: 'lnkQHH9cdP0',
+        title: 'Project Explanation'
       }
-    });
+    };
 
-    const toTopBtn = document.getElementById('toTopBtn');
-    if (toTopBtn) {
-      window.addEventListener('scroll', () => {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-          toTopBtn.classList.add('show');
-        } else {
-          toTopBtn.classList.remove('show');
+    function createModal(controller) {
+      const modal = document.getElementById(controller.id);
+      const videoBox = modal.querySelector('.demo-modal__video-wrapper');
+      const embedUrl = `https://www.youtube.com/embed/${controller.ytId}?autoplay=1&rel=0&modestbranding=1`;
+
+      const open = () => {
+        videoBox.innerHTML = `
+          <div class="demo-embed">
+            <iframe
+              src="${embedUrl}"
+              title="${controller.title}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        `;
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        trapFocus(modal);
+      };
+
+      const close = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        videoBox.innerHTML = '';
+      };
+
+      modal.addEventListener('click', (e) => {
+        if (e.target.closest('[data-close]')) {
+          close();
         }
       });
 
-      toTopBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      return { open, close };
+    }
+
+    Object.keys(modalControllers).forEach(key => {
+      modals[key] = createModal(modalControllers[key]);
+      const openBtn = document.getElementById(`watch${key.charAt(0).toUpperCase() + key.slice(1)}Btn`);
+      if (openBtn) {
+        openBtn.addEventListener('click', modals[key].open);
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        Object.values(modals).forEach(modal => {
+          if (document.getElementById(modalControllers[Object.keys(modals).find(key => modals[key] === modal)].id).classList.contains('is-open')) {
+            modal.close();
+          }
+        });
+      }
+    });
+
+    function trapFocus(element) {
+      const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      element.addEventListener('keydown', function(e) {
+        const isTabPressed = (e.key === 'Tab' || e.keyCode === 9);
+        if (!isTabPressed) {
+          return;
+        }
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            lastFocusable.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            firstFocusable.focus();
+            e.preventDefault();
+          }
+        }
       });
+      if (firstFocusable) {
+        firstFocusable.focus();
+      }
     }
   })();
   </script>
-
-  <script src="assets/js/cursor-glow.js" defer></script>
 
 
 </body>

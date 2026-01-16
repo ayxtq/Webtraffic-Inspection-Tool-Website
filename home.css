@@ -36,20 +36,6 @@
   height: auto;
   border-radius: 20px;
   background: rgba(0,0,0,.15);
-  animation: float 4s ease-in-out infinite;
-}
-
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
 }
 
 
@@ -84,6 +70,14 @@
 @media (max-width: 480px) {
   .project-logo img {
     height: 240px;
+  }
+}
+
+@media (max-width: 600px) {
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 }
 
